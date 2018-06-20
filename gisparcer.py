@@ -13,7 +13,7 @@ def main():
     postalkey  = "PostalCode"
     countystate = "Bedford County, Va"
     csv_file = "/opt/repos/GIS_parser/Bedford_County_Parcels.csv"
-    gc = Geocoder("AIzaSyBYJPGF5vhApc6wT2z2SSjaUbxG938nZy8")
+    gc = Geocoder("")
     gc.set_proxy("http://SK1033:Cheese29@cdcwsa02.commscope.com:3128")
 
     if os.path.isfile(csv_file):
