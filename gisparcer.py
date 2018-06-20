@@ -13,16 +13,19 @@ def main():
     postalkey  = "PostalCode"
     countystate = "Bedford County, Va"
     csv_file = "/opt/repos/GIS_parser/Bedford_County_Parcels.csv"
+    gc = Geocoder("AIzaSyBYJPGF5vhApc6wT2z2SSjaUbxG938nZy8")
+    gc.set_proxy("http://SK1033:Cheese29@cdcwsa02.commscope.com:3128")
+
     if os.path.isfile(csv_file):
-        print "Files exists."
+        #print "Files exists."
         with open(csv_file, 'rb') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
                 street = row[addresskey].strip()
                 if addresskey in row and len(street) > 0:
                     fulladdress = street + ", " + countystate
-                    print fulladdress
-                    result = Geocoder.geocode(fulladdress)
+                    #print fulladdress
+                    result = gc.geocode(fulladdress)
                     if result.count > 0 and result.administrative_area_level_2 == "Bedford County":
                         print result.postal_code
                         row[postalkey] = result.postal_code
