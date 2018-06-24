@@ -41,16 +41,14 @@ def findlastid():
         return 0
 
 
-"""     
-main
-"""
-
 def main():
 
-
     countystate = "Bedford County, Va"
+
     lastid = findlastid()
     reader = initreader()
+    gc = Geocoder("API KEY")
+    #gc.set_proxy("http://SK1033:Cheese29@cdcwsa02.commscope.com:3128")
 
     for row in reader:
         if row[objectkey] < lastid:
@@ -58,14 +56,13 @@ def main():
         street = row[addresskey].strip()
         if addresskey in row and len(street) > 0:
             fulladdress = street + ", " + countystate
-            result = Geocoder.geocode(fulladdress)
+            result = gc.geocode(fulladdress)
             if result.count > 0 and result.administrative_area_level_2 == "Bedford County":
                 writeobjectid(row[objectkey], row[addresskey], result.postal_code)
             else:
                 writeobjectid(row[objectkey], row[addresskey], 77777)
         else:
             writeobjectid(row[objectkey], row[addresskey], 33333)
-
 
 
 if __name__ == '__main__':
