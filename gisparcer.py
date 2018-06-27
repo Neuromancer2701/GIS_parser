@@ -45,8 +45,8 @@ def findlastid():
 def main():
 
     countystate = "Bedford County, Va"
-    gc = Geocoder("")
-    #gc.set_proxy("http://SK1033:Cheese29@cdcwsa02.commscope.com:3128")
+    gc = Geocoder("AIzaSyDCEJVC_uqc29_5AmALYt2NDoMxML64A84")
+    gc.set_proxy("http://SK1033:Cheese29@cdcwsa02.commscope.com:3128")
 
     lastid = findlastid()
     if os.path.isfile(csv_read):
@@ -56,6 +56,12 @@ def main():
                 if objectkey in row  and row[objectkey] < lastid:
                     continue
                 street = row[addresskey].strip()
+                position = street.find('&')
+                while position > 0:
+                    street = street[position + 1:]
+                    position = street.find('&')
+
+                street.strip()
                 if addresskey in row and len(street) > 0:
                     fulladdress = street + ", " + countystate
                     result = gc.geocode(fulladdress)
