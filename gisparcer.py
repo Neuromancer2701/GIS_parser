@@ -45,7 +45,7 @@ def findlastid():
 def main():
 
     countystate = "Bedford County, Va"
-    gc = Geocoder("AIzaSyDCEJVC_uqc29_5AmALYt2NDoMxML64A84")
+    gc = Geocoder("")
     gc.set_proxy("http://SK1033:Cheese29@cdcwsa02.commscope.com:3128")
 
     lastid = findlastid()
